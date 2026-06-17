@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -25,8 +26,17 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-brand focus:px-4 focus:py-2 focus:font-medium focus:text-bg focus:outline-none"
+        >
+          Saltar al contenido
+        </a>
         <Header />
-        {children}
+        <main id="main" tabIndex={-1} className="flex flex-1 flex-col focus:outline-none">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

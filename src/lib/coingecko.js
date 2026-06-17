@@ -48,6 +48,14 @@ export function getCoin(id) {
   return cg(`/coins/${encodeURIComponent(id)}?${params}`);
 }
 
+export function getMarketChart(id, { days = 7 } = {}) {
+  const params = new URLSearchParams({ vs_currency: "usd", days: String(days) });
+  // El histórico no cambia rápido: revalida cada 10 min (no 60s).
+  return cg(`/coins/${encodeURIComponent(id)}/market_chart?${params}`, {
+    revalidate: 600,
+  });
+}
+
 // Monedas ya mapeadas a la forma que usa la UI (precio formateado incluido).
 export async function getCoins() {
   const markets = await getMarkets();

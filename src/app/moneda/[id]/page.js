@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import ChangeBadge from "@/components/ChangeBadge";
-import { getCoin } from "@/lib/coingecko";
+import PriceChart from "@/components/PriceChart";
+import { getCoin, getMarketChart } from "@/lib/coingecko";
 import { formatUsd, formatPrice } from "@/lib/format";
 
 export default async function MonedaDetalle({ params }) {
   const { id } = await params; // Next 16: params es asíncrono
-  const c = await getCoin(id);
+  const [c, chart] = await Promise.all([getCoin(id), getMarketChart(id)]);
   const md = c.market_data;
 
   return (
@@ -55,6 +56,8 @@ export default async function MonedaDetalle({ params }) {
           </dd>
         </div>
       </dl>
+
+      <PriceChart prices={chart.prices} />
     </div>
   );
 }

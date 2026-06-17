@@ -38,6 +38,17 @@
       opacity: 1;
     }
   }
+
+  /* Gráfico: la línea se dibuja (pathLength normalizado a 1) */
+  --animate-draw: draw 700ms ease-out;
+  @keyframes draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
 }
 
 body {

@@ -36,6 +36,18 @@ export function getMarkets({ perPage = 10 } = {}) {
   return cg(`/coins/markets?${params}`);
 }
 
+export function getCoin(id) {
+  const params = new URLSearchParams({
+    localization: "false",
+    tickers: "false",
+    market_data: "true",
+    community_data: "false",
+    developer_data: "false",
+    sparkline: "false",
+  });
+  return cg(`/coins/${encodeURIComponent(id)}?${params}`);
+}
+
 // Monedas ya mapeadas a la forma que usa la UI (precio formateado incluido).
 export async function getCoins() {
   const markets = await getMarkets();

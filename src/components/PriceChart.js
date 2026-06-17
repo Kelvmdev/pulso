@@ -15,6 +15,11 @@ const dateFmt = new Intl.DateTimeFormat("es-ES", {
   minute: "2-digit",
 });
 const dayFmt = new Intl.DateTimeFormat("es-ES", { day: "numeric", month: "short" });
+const dayYearFmt = new Intl.DateTimeFormat("es-ES", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+});
 
 export default function PriceChart({ prices }) {
   const ref = useRef(null);
@@ -50,6 +55,10 @@ export default function PriceChart({ prices }) {
   }
 
   const frac = active != null ? active / (n - 1) : 0;
+
+  // Rangos largos (>60 días: 90d/1a) muestran el año en los extremos.
+  const longRange = prices[n - 1][0] - prices[0][0] > 60 * 864e5;
+  const axisFmt = longRange ? dayYearFmt : dayFmt;
 
   return (
     <figure>
@@ -106,10 +115,10 @@ export default function PriceChart({ prices }) {
           {formatPrice(min)}
         </span>
         <span className="pointer-events-none absolute bottom-0 left-0 text-xs text-muted">
-          {dayFmt.format(new Date(prices[0][0]))}
+          {axisFmt.format(new Date(prices[0][0]))}
         </span>
         <span className="pointer-events-none absolute bottom-0 right-0 text-xs text-muted">
-          {dayFmt.format(new Date(prices[n - 1][0]))}
+          {axisFmt.format(new Date(prices[n - 1][0]))}
         </span>
 
         {/* tooltip */}

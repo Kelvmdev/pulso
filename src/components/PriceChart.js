@@ -56,9 +56,11 @@ export default function PriceChart({ prices }) {
 
   const frac = active != null ? active / (n - 1) : 0;
 
-  // Rangos largos (>60 días: 90d/1a) muestran el año en los extremos.
+  // Rangos largos (>60 días: 90d/1a) muestran el año; el tooltip además oculta
+  // la hora (en datos diarios sería 00:00, no aporta).
   const longRange = prices[n - 1][0] - prices[0][0] > 60 * 864e5;
   const axisFmt = longRange ? dayYearFmt : dayFmt;
+  const tooltipFmt = longRange ? dayYearFmt : dateFmt;
 
   return (
     <figure>
@@ -131,7 +133,7 @@ export default function PriceChart({ prices }) {
               {formatPrice(vals[active])}
             </div>
             <div className="text-xs text-muted">
-              {dateFmt.format(new Date(prices[active][0]))}
+              {tooltipFmt.format(new Date(prices[active][0]))}
             </div>
           </div>
         )}

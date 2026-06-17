@@ -5,6 +5,16 @@ import ChartPanel from "@/components/ChartPanel";
 import { getCoin, getMarketChart } from "@/lib/coingecko";
 import { formatUsd, formatPrice } from "@/lib/format";
 
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const c = await getCoin(id);
+  const sym = c.symbol.toUpperCase();
+  return {
+    title: `${c.name} (${sym}) — precio y gráfico`,
+    description: `Precio en vivo, variación 24h, capitalización y gráfico histórico de ${c.name} (${sym}).`,
+  };
+}
+
 export default async function MonedaDetalle({ params }) {
   const { id } = await params; // Next 16: params es asíncrono
   const [c, chart] = await Promise.all([getCoin(id), getMarketChart(id)]);

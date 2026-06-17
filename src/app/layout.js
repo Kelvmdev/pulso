@@ -14,7 +14,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Pulso — monitor del mercado cripto",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  ),
+  title: {
+    template: "%s | Pulso",
+    default: "Pulso — monitor del mercado cripto en vivo",
+  },
   description:
     "Dashboard cripto en vivo: capitalización, volumen y precios que laten en tiempo real.",
 };

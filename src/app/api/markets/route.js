@@ -4,6 +4,13 @@ import { getCoins } from "@/lib/coingecko";
 // sale en la respuesta. El fetch interno cachea 60s -> 1 llamada/min a CoinGecko
 // aunque haya muchos visitantes.
 export async function GET() {
-  const coins = await getCoins();
-  return Response.json(coins);
+  try {
+    const coins = await getCoins();
+    return Response.json(coins);
+  } catch {
+    return Response.json(
+      { error: "No se pudo obtener el mercado" },
+      { status: 502 }
+    );
+  }
 }

@@ -2,11 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import ChangeBadge from "@/components/ChangeBadge";
 import ChartPanel from "@/components/ChartPanel";
+import { notFound } from "next/navigation";
 import { getCoin, getMarketChart } from "@/lib/coingecko";
 import { formatUsd, formatPrice } from "@/lib/format";
 
+// Un id de CoinGecko es un slug (minúsculas/dígitos/guiones). Si no lo es,
+// es 404 directo sin gastar una llamada a la API.
+const VALID_ID = /^[a-z0-9-]{1,64}$/;
+
 export async function generateMetadata({ params }) {
   const { id } = await params;
+  if (!VALID_ID.test(id)) notFound();
   const c = await getCoin(id);
   const sym = c.symbol.toUpperCase();
   return {
@@ -17,6 +23,7 @@ export async function generateMetadata({ params }) {
 
 export default async function MonedaDetalle({ params }) {
   const { id } = await params; // Next 16: params es asíncrono
+  if (!VALID_ID.test(id)) notFound();
   const [c, chart] = await Promise.all([getCoin(id), getMarketChart(id)]);
   const md = c.market_data;
 

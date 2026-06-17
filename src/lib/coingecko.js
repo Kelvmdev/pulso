@@ -22,3 +22,14 @@ async function cg(path, { revalidate = 60 } = {}) {
 export function getGlobal() {
   return cg("/global");
 }
+
+export function getMarkets({ perPage = 10 } = {}) {
+  const params = new URLSearchParams({
+    vs_currency: "usd",
+    order: "market_cap_desc",
+    per_page: String(perPage),
+    page: "1",
+    price_change_percentage: "24h",
+  });
+  return cg(`/coins/markets?${params}`);
+}

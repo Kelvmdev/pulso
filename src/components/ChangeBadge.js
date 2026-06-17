@@ -1,6 +1,7 @@
 // Badge de variación %24h. La flecha + el signo dan la pista sin depender
 // solo del color (accesibilidad).
 export default function ChangeBadge({ value }) {
+  if (value == null || Number.isNaN(value)) return null;
   const up = value >= 0;
   return (
     <span

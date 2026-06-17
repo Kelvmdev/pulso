@@ -1,10 +1,18 @@
 import MetricCard from "@/components/MetricCard";
 import CoinList from "@/components/CoinList";
-import { getGlobal } from "@/lib/coingecko";
-import { formatUsd } from "@/lib/format";
+import { getGlobal, getMarkets } from "@/lib/coingecko";
+import { formatUsd, formatPrice } from "@/lib/format";
 
 export default async function Home() {
-  const { data } = await getGlobal();
+  const [{ data }, markets] = await Promise.all([getGlobal(), getMarkets()]);
+  const coins = markets.map((c) => ({
+    id: c.id,
+    name: c.name,
+    ticker: c.symbol.toUpperCase(),
+    price: formatPrice(c.current_price),
+    change: c.price_change_percentage_24h,
+    image: c.image,
+  }));
   const stats = [
     {
       label: "Cap. total del mercado",
@@ -17,9 +25,9 @@ export default async function Home() {
       change: data.volume_change_percentage_24h_usd,
     },
     {
-      // /global no provee %24h de dominancia → sin badge (no se inventa).
-      label: "Dominancia BTC",
-      value: `${data.market_cap_percentage.btc.toFixed(1)} %`,
+      // /global no da %24h de dominancia → sin badge. Mostramos BTC / ETH.
+      label: "Dominancia BTC / ETH",
+      value: `${data.market_cap_percentage.btc.toFixed(1)}% / ${data.market_cap_percentage.eth.toFixed(1)}%`,
     },
   ];
 
@@ -47,7 +55,7 @@ export default async function Home() {
           Top monedas
         </h2>
         <div className="mt-4">
-          <CoinList />
+          <CoinList coins={coins} />
         </div>
       </section>
     </div>

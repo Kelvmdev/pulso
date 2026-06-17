@@ -1,16 +1,23 @@
+import Image from "next/image";
 import SplitFlap from "@/components/SplitFlap";
 import ChangeBadge from "@/components/ChangeBadge";
-import { coins } from "@/lib/mock";
 
-export default function CoinList() {
+export default function CoinList({ coins }) {
   return (
     <ul className="flex flex-col gap-2">
       {coins.map((c) => (
         <li
-          key={c.ticker}
+          key={c.id}
           className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 rounded-lg border border-border bg-surface px-4 py-3"
         >
-          <div className="flex min-w-0 items-baseline gap-2">
+          <div className="flex min-w-0 items-center gap-2">
+            <Image
+              src={c.image}
+              alt=""
+              width={24}
+              height={24}
+              className="rounded-full"
+            />
             <span className="truncate font-medium text-text">{c.name}</span>
             <span className="font-mono text-xs text-muted">{c.ticker}</span>
           </div>

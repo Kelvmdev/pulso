@@ -42,18 +42,18 @@ export default function Header() {
         aria-label="Principal"
         className="ml-auto flex items-center gap-4 text-sm sm:ml-0"
       >
-        <a
-          href="#mercado"
+        <Link
+          href="/#mercado"
           className="rounded text-muted outline-none transition-colors hover:text-text focus-visible:ring-2 focus-visible:ring-brand"
         >
           Mercado
-        </a>
-        <a
-          href="#acerca"
+        </Link>
+        <Link
+          href="/#acerca"
           className="rounded text-muted outline-none transition-colors hover:text-text focus-visible:ring-2 focus-visible:ring-brand"
         >
           Acerca
-        </a>
+        </Link>
       </nav>
     </header>
   );

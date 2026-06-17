@@ -1,5 +1,7 @@
 // Capa server-side para CoinGecko. La key vive solo aquí (servidor),
 // se manda en la cabecera x-cg-demo-api-key (nunca en la URL) y NUNCA se loguea.
+import { formatPrice } from "@/lib/format";
+
 const BASE = "https://api.coingecko.com/api/v3";
 
 async function cg(path, { revalidate = 60 } = {}) {
@@ -32,4 +34,17 @@ export function getMarkets({ perPage = 10 } = {}) {
     price_change_percentage: "24h",
   });
   return cg(`/coins/markets?${params}`);
+}
+
+// Monedas ya mapeadas a la forma que usa la UI (precio formateado incluido).
+export async function getCoins() {
+  const markets = await getMarkets();
+  return markets.map((c) => ({
+    id: c.id,
+    name: c.name,
+    ticker: c.symbol.toUpperCase(),
+    price: formatPrice(c.current_price),
+    change: c.price_change_percentage_24h,
+    image: c.image,
+  }));
 }

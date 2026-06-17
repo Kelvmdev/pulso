@@ -1,8 +1,26 @@
+"use client";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import SplitFlap from "@/components/SplitFlap";
 import ChangeBadge from "@/components/ChangeBadge";
 
-export default function CoinList({ coins }) {
+export default function CoinList({ initialCoins }) {
+  const [coins, setCoins] = useState(initialCoins);
+
+  // Refresco real cada 60s, sin recargar. /api/markets cachea 60s en servidor,
+  // así que esto NO multiplica las llamadas a CoinGecko.
+  useEffect(() => {
+    const id = setInterval(async () => {
+      try {
+        const res = await fetch("/api/markets");
+        if (res.ok) setCoins(await res.json());
+      } catch {
+        // si un refresco falla, conservamos los datos previos
+      }
+    }, 60000);
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <ul className="flex flex-col gap-2">
       {coins.map((c) => (

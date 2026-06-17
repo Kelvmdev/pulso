@@ -1,18 +1,10 @@
 import MetricCard from "@/components/MetricCard";
 import CoinList from "@/components/CoinList";
-import { getGlobal, getMarkets } from "@/lib/coingecko";
-import { formatUsd, formatPrice } from "@/lib/format";
+import { getGlobal, getCoins } from "@/lib/coingecko";
+import { formatUsd } from "@/lib/format";
 
 export default async function Home() {
-  const [{ data }, markets] = await Promise.all([getGlobal(), getMarkets()]);
-  const coins = markets.map((c) => ({
-    id: c.id,
-    name: c.name,
-    ticker: c.symbol.toUpperCase(),
-    price: formatPrice(c.current_price),
-    change: c.price_change_percentage_24h,
-    image: c.image,
-  }));
+  const [{ data }, coins] = await Promise.all([getGlobal(), getCoins()]);
   const stats = [
     {
       label: "Cap. total del mercado",
@@ -55,7 +47,7 @@ export default async function Home() {
           Top monedas
         </h2>
         <div className="mt-4">
-          <CoinList coins={coins} />
+          <CoinList initialCoins={coins} />
         </div>
       </section>
     </div>

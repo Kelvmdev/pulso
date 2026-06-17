@@ -25,6 +25,19 @@
       stroke-dashoffset: -240;
     }
   }
+
+  /* Volteo split-flap: la ficha cae desde arriba al cambiar el dígito */
+  --animate-flap: flap 320ms ease-out;
+  @keyframes flap {
+    from {
+      transform: rotateX(-90deg);
+      opacity: 0.25;
+    }
+    to {
+      transform: rotateX(0);
+      opacity: 1;
+    }
+  }
 }
 
 body {

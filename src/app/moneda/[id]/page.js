@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ChangeBadge from "@/components/ChangeBadge";
-import PriceChart from "@/components/PriceChart";
+import ChartPanel from "@/components/ChartPanel";
 import { getCoin, getMarketChart } from "@/lib/coingecko";
 import { formatUsd, formatPrice } from "@/lib/format";
 
@@ -57,7 +57,7 @@ export default async function MonedaDetalle({ params }) {
         </div>
       </dl>
 
-      <PriceChart prices={chart.prices} />
+      <ChartPanel id={id} initialPrices={chart.prices} />
     </div>
   );
 }

@@ -52,7 +52,7 @@ export default function PriceChart({ prices }) {
   const frac = active != null ? active / (n - 1) : 0;
 
   return (
-    <figure className="mt-8">
+    <figure>
       <figcaption className="sr-only">{summary}</figcaption>
       <div
         ref={ref}

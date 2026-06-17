@@ -43,13 +43,13 @@ export default function Header() {
         className="ml-auto flex items-center gap-4 text-sm sm:ml-0"
       >
         <Link
-          href="/#mercado"
+          href="/"
           className="rounded text-muted outline-none transition-colors hover:text-text focus-visible:ring-2 focus-visible:ring-brand"
         >
           Mercado
         </Link>
         <Link
-          href="/#acerca"
+          href="/acerca"
           className="rounded text-muted outline-none transition-colors hover:text-text focus-visible:ring-2 focus-visible:ring-brand"
         >
           Acerca

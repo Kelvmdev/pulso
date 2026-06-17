@@ -50,29 +50,6 @@ export default async function Home() {
           <CoinList initialCoins={coins} />
         </div>
       </section>
-
-      <section
-        id="acerca"
-        aria-labelledby="acerca-title"
-        className="mt-8 rounded-lg border border-border bg-surface p-4"
-      >
-        <h2
-          id="acerca-title"
-          className="text-lg font-semibold tracking-tight text-text"
-        >
-          Acerca
-        </h2>
-        <p className="mt-2 max-w-prose text-sm text-muted">
-          Pulso es un monitor del mercado cripto en vivo: capitalización,
-          volumen y precios que se actualizan solos.
-        </p>
-        <p className="mt-2 text-sm text-muted">
-          Datos de CoinGecko (pueden tener ~1 min de retraso).
-        </p>
-        <p className="mt-2 text-sm text-muted">
-          Solo informativo, no es asesoría financiera.
-        </p>
-      </section>
     </div>
   );
 }

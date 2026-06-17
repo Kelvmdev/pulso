@@ -13,6 +13,7 @@ export default async function sitemap() {
 
   return [
     { url: SITE, lastModified: new Date(), changeFrequency: "hourly", priority: 1 },
+    { url: `${SITE}/acerca`, changeFrequency: "monthly", priority: 0.5 },
     ...coinUrls,
   ];
 }

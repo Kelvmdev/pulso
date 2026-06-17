@@ -14,13 +14,13 @@ export default function Footer() {
 
         <nav aria-label="Pie de página" className="flex flex-col gap-2 sm:items-end">
           <Link
-            href="/#mercado"
+            href="/"
             className="rounded outline-none transition-colors hover:text-text focus-visible:ring-2 focus-visible:ring-brand"
           >
             Mercado
           </Link>
           <Link
-            href="/#acerca"
+            href="/acerca"
             className="rounded outline-none transition-colors hover:text-text focus-visible:ring-2 focus-visible:ring-brand"
           >
             Acerca

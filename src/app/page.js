@@ -1,8 +1,28 @@
 import MetricCard from "@/components/MetricCard";
 import CoinList from "@/components/CoinList";
-import { marketStats } from "@/lib/mock";
+import { getGlobal } from "@/lib/coingecko";
+import { formatUsd } from "@/lib/format";
 
-export default function Home() {
+export default async function Home() {
+  const { data } = await getGlobal();
+  const stats = [
+    {
+      label: "Cap. total del mercado",
+      value: formatUsd(data.total_market_cap.usd),
+      change: data.market_cap_change_percentage_24h_usd,
+    },
+    {
+      label: "Volumen 24h",
+      value: formatUsd(data.total_volume.usd),
+      change: data.volume_change_percentage_24h_usd,
+    },
+    {
+      // /global no provee %24h de dominancia → sin badge (no se inventa).
+      label: "Dominancia BTC",
+      value: `${data.market_cap_percentage.btc.toFixed(1)} %`,
+    },
+  ];
+
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6">
       <section id="mercado" aria-labelledby="mercado-title">
@@ -13,7 +33,7 @@ export default function Home() {
           Mercado
         </h1>
         <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {marketStats.map((s) => (
+          {stats.map((s) => (
             <MetricCard key={s.label} {...s} />
           ))}
         </div>

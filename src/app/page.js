@@ -1,4 +1,5 @@
 import MetricCard from "@/components/MetricCard";
+import CoinList from "@/components/CoinList";
 import { marketStats } from "@/lib/mock";
 
 export default function Home() {
@@ -15,6 +16,18 @@ export default function Home() {
           {marketStats.map((s) => (
             <MetricCard key={s.label} {...s} />
           ))}
+        </div>
+      </section>
+
+      <section id="top" aria-labelledby="top-title" className="mt-8">
+        <h2
+          id="top-title"
+          className="text-lg font-semibold tracking-tight text-text"
+        >
+          Top monedas
+        </h2>
+        <div className="mt-4">
+          <CoinList />
         </div>
       </section>
     </div>

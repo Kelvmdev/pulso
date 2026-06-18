@@ -21,7 +21,7 @@ const dayYearFmt = new Intl.DateTimeFormat("es-ES", {
   year: "numeric",
 });
 
-export default function PriceChart({ prices }) {
+export default function PriceChart({ prices, period = "el periodo" }) {
   const ref = useRef(null);
   const [active, setActive] = useState(null); // índice del punto bajo el puntero
 
@@ -42,7 +42,7 @@ export default function PriceChart({ prices }) {
   const first = vals[0];
   const last = vals[n - 1];
   const changePct = ((last - first) / first) * 100;
-  const summary = `Evolución del precio en 7 días: desde ${formatPrice(
+  const summary = `Evolución del precio en ${period}: desde ${formatPrice(
     first
   )} hasta ${formatPrice(last)}, ${changePct >= 0 ? "+" : ""}${changePct.toFixed(
     2

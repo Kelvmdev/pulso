@@ -3,6 +3,12 @@ import CoinList from "@/components/CoinList";
 import { getGlobal, getCoins } from "@/lib/coingecko";
 import { formatUsd } from "@/lib/format";
 
+export const metadata = {
+  description:
+    "Precios en vivo del mercado cripto: capitalización total, volumen 24h, dominancia y las principales monedas con sus gráficos.",
+  alternates: { canonical: "/" },
+};
+
 export default async function Home() {
   // Cada fetch por separado: si uno falla (p. ej. 429), mostramos lo que sí
   // llegó en vez de tumbar toda la página.

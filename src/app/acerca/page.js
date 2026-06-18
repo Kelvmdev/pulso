@@ -4,6 +4,7 @@ export const metadata = {
   title: "Acerca",
   description:
     "Qué es Pulso, de dónde vienen los datos y aviso de uso informativo.",
+  alternates: { canonical: "/acerca" },
 };
 
 export default function Acerca() {
@@ -11,7 +12,7 @@ export default function Acerca() {
     <div className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6">
       <Link
         href="/"
-        className="inline-flex items-center gap-1 rounded text-sm text-muted outline-none transition-colors hover:text-text focus-visible:ring-2 focus-visible:ring-brand"
+        className="inline-flex items-center gap-1 rounded text-sm text-muted outline-none transition-colors active:scale-95 hover:text-text focus-visible:ring-2 focus-visible:ring-brand"
       >
         ← Volver al dashboard
       </Link>

@@ -3,11 +3,11 @@ import { useState } from "react";
 import PriceChart from "@/components/PriceChart";
 
 const RANGES = [
-  { label: "24h", days: 1 },
-  { label: "7d", days: 7 },
-  { label: "30d", days: 30 },
-  { label: "90d", days: 90 },
-  { label: "1a", days: 365 },
+  { label: "24h", days: 1, period: "24 horas" },
+  { label: "7d", days: 7, period: "7 días" },
+  { label: "30d", days: 30, period: "30 días" },
+  { label: "90d", days: 90, period: "90 días" },
+  { label: "1a", days: 365, period: "1 año" },
 ];
 
 export default function ChartPanel({ id, initialPrices }) {
@@ -46,7 +46,7 @@ export default function ChartPanel({ id, initialPrices }) {
               type="button"
               aria-pressed={isActive}
               onClick={() => selectRange(r.days)}
-              className={`rounded-md border px-3 py-1 text-sm font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-brand ${
+              className={`rounded-md border px-3 py-1 text-sm font-medium outline-none transition-colors active:scale-95 focus-visible:ring-2 focus-visible:ring-brand ${
                 isActive
                   ? "border-brand bg-brand/10 text-brand"
                   : "border-border text-muted hover:text-text"
@@ -65,14 +65,18 @@ export default function ChartPanel({ id, initialPrices }) {
             <button
               type="button"
               onClick={() => selectRange(days)}
-              className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-bg outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-text"
+              className="rounded-lg bg-brand px-4 py-2 text-sm font-medium text-bg outline-none transition-opacity active:scale-95 hover:opacity-90 focus-visible:ring-2 focus-visible:ring-text"
             >
               Reintentar
             </button>
           </div>
         ) : (
           <>
-            <PriceChart key={renderKey} prices={prices} />
+            <PriceChart
+              key={renderKey}
+              prices={prices}
+              period={RANGES.find((r) => r.days === days)?.period ?? "el periodo"}
+            />
             {status === "loading" && (
               <div
                 aria-hidden="true"

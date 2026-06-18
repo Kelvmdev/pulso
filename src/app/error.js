@@ -16,7 +16,7 @@ export default function Error({ error, reset }) {
       </p>
       <button
         onClick={reset}
-        className="rounded-lg bg-brand px-4 py-2 font-medium text-bg outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-text"
+        className="rounded-lg bg-brand px-4 py-2 font-medium text-bg outline-none transition-opacity active:scale-95 hover:opacity-90 focus-visible:ring-2 focus-visible:ring-text"
       >
         Reintentar
       </button>

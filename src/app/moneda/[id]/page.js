@@ -18,6 +18,7 @@ export async function generateMetadata({ params }) {
   return {
     title: `${c.name} (${sym}) — precio y gráfico`,
     description: `Precio en vivo, variación 24h, capitalización y gráfico histórico de ${c.name} (${sym}).`,
+    alternates: { canonical: `/moneda/${id}` },
   };
 }
 
@@ -31,7 +32,7 @@ export default async function MonedaDetalle({ params }) {
     <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6">
       <Link
         href="/"
-        className="inline-flex items-center gap-1 rounded text-sm text-muted outline-none transition-colors hover:text-text focus-visible:ring-2 focus-visible:ring-brand"
+        className="inline-flex items-center gap-1 rounded text-sm text-muted outline-none transition-colors active:scale-95 hover:text-text focus-visible:ring-2 focus-visible:ring-brand"
       >
         ← Volver
       </Link>

@@ -49,7 +49,7 @@ export default function CoinList({ initialCoins }) {
         <li key={c.id}>
           <Link
             href={`/moneda/${c.id}`}
-            className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 rounded-lg border border-border bg-surface px-4 py-3 outline-none transition-colors hover:border-brand/40 focus-visible:ring-2 focus-visible:ring-brand"
+            className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 rounded-lg border border-border bg-surface px-4 py-3 outline-none transition-colors active:scale-95 hover:border-brand/40 focus-visible:ring-2 focus-visible:ring-brand"
           >
             <div className="flex min-w-0 items-center gap-2">
               <Image
